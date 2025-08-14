@@ -1,92 +1,72 @@
 <!DOCTYPE html>
-<!-- saved from url=(0052)https://preview.ldpdemo.com/688e0b10804b6c0038569c0b -->
 <html lang="vi">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Trường Cao Đẳng Y Dược Và Kinh Tế Công Nghệ</title>
         <meta http-equiv="Cache-Control" content="no-cache">
-        <style type="text/css">
-            .hGmDVwFBbnQSlOXIkqdut {
-                width: 140px;
-                height: 30px;
-                position: fixed;
-                bottom: -40px;
-                left: 10px;
-                z-index: 10000000000;
-                background: url("https://w.ladicdn.com/source/v3/by/ladipage.svg?v=1.0") no-repeat center #fafafa;
-                background-size: 90% 70%;
-                border-radius: 4px 4px 0 0;
-                display: block;
-                animation: hGmDVwFBbnQSlOXIkqdut 10s;
-            }
-
-            @keyframes hGmDVwFBbnQSlOXIkqdut {
-                0% {
-                    bottom: -40px;
-                }
-
-                10% {
-                    bottom: 0;
-                }
-
-                90% {
-                    bottom: 0;
-                }
-
-                100% {
-                    bottom: -40px;
-                }
-            }
-        </style>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta http-equiv="Expires" content="-1">
         <meta name="keywords" content="">
         <meta name="description" content="Trường Cao Đẳng Y Dược Và Kinh Tế Công Nghệ">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+ 
         <script type="text/javascript">
-            window.ladi_viewport = function(b) {
-                var a = document;
-                b = b ? b : 'innerWidth';
-                var c = window[b];
-                var d = c < 768;
-                if (typeof window.ladi_is_desktop == "undefined" || window.ladi_is_desktop == undefined) {
-                    window.ladi_is_desktop = !d;
-                }
-                var e = 1200;
-                var f = 420;
-                var g = '';
-                if (!d) {
-                    g = "width=" + e + ",user-scalable=no,initial-scale=1.0";
-                } else {
-                    var h = 1;
-                    var i = f;
-                    if (i != c) {
-                        h = c / i;
-                    }
-                    g = "width=" + i + ",user-scalable=no,initial-scale=" + h + ",minimum-scale=" + h + ",maximum-scale=" + h;
-                }
-                var j = a.getElementById("viewport");
-                if (!j) {
-                    j = a.createElement("meta");
-                    j.id = "viewport";
-                    j.name = "viewport";
-                    a.head.appendChild(j);
-                }
-                j.setAttribute("content", g);
-            }
-            ;
-            window.ladi_viewport();
-            window.ladi_fbq_data = [];
-            window.ladi_fbq = function() {
-                window.ladi_fbq_data.push(arguments);
-            }
-            ;
-            window.ladi_ttq_data = [];
-            window.ladi_ttq = function() {
-                window.ladi_ttq_data.push(arguments);
-            }
-            ;
-        </script>
+(function() {
+    function ladi_viewport() {
+        var doc = document;
+        // Phát hiện mobile: dùng matchMedia + fallback userAgent
+        var isMobile = window.matchMedia("(max-width: 768px)").matches ||
+                       /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+        // Lưu trạng thái desktop/mobile vào biến toàn cục
+        window.ladi_is_desktop = !isMobile;
+
+        var desktopWidth = 1200;
+        var mobileWidth = 420;
+        var viewportContent = '';
+
+        if (!isMobile) {
+            // Desktop
+            viewportContent = "width=" + desktopWidth + ",user-scalable=no,initial-scale=1.0";
+        } else {
+            // Mobile
+            var actualWidth = window.innerWidth;
+            var scale = actualWidth / mobileWidth;
+            viewportContent = "width=" + mobileWidth + 
+                              ",user-scalable=no,initial-scale=" + scale + 
+                              ",minimum-scale=" + scale + 
+                              ",maximum-scale=" + scale;
+        }
+
+        // Chèn hoặc cập nhật thẻ meta viewport
+        var meta = doc.getElementById("viewport");
+        if (!meta) {
+            meta = doc.createElement("meta");
+            meta.id = "viewport";
+            meta.name = "viewport";
+            doc.head.appendChild(meta);
+        }
+        meta.setAttribute("content", viewportContent);
+    }
+
+    // Chạy khi load trang
+    ladi_viewport();
+    // Chạy lại khi thay đổi kích thước hoặc xoay màn hình
+    window.addEventListener('resize', ladi_viewport);
+    window.addEventListener('orientationchange', ladi_viewport);
+
+    // Giữ nguyên các hàm fbq và ttq của code gốc
+    window.ladi_fbq_data = [];
+    window.ladi_fbq = function() {
+        window.ladi_fbq_data.push(arguments);
+    };
+    window.ladi_ttq_data = [];
+    window.ladi_ttq = function() {
+        window.ladi_ttq_data.push(arguments);
+    };
+})();
+</script>
+
         <meta id="viewport" name="viewport" content="width=1200,user-scalable=no,initial-scale=1.0">
         <link rel="canonical" href="http://preview.ldpdemo.com/688e0b10804b6c0038569c0b">
         <meta property="og:url" content="http://preview.ldpdemo.com/688e0b10804b6c0038569c0b">
