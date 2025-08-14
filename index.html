@@ -8,28 +8,29 @@
         <meta http-equiv="Expires" content="-1">
         <meta name="keywords" content="">
         <meta name="description" content="Trường Cao Đẳng Y Dược Và Kinh Tế Công Nghệ">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-        <script type="text/javascript">
+       <meta id="viewport" name="viewport" content="width=420,user-scalable=no,initial-scale=1.0">
+<script type="text/javascript">
 (function() {
-    function ladi_viewport() {
-        var doc = document;
-        // Phát hiện mobile: dùng matchMedia + fallback userAgent
+    var meta = document.getElementById("viewport");
+
+    function updateViewport() {
         var isMobile = window.matchMedia("(max-width: 768px)").matches ||
                        /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-        // Lưu trạng thái desktop/mobile vào biến toàn cục
         window.ladi_is_desktop = !isMobile;
 
         var desktopWidth = 1200;
         var mobileWidth = 420;
-        var viewportContent = '';
+        var viewportContent;
 
         if (!isMobile) {
-            // Desktop
             viewportContent = "width=" + desktopWidth + ",user-scalable=no,initial-scale=1.0";
         } else {
-            // Mobile
+            // Buộc reflow để iOS cập nhật kích thước thật
+            document.body.style.display = 'none';
+            document.body.offsetHeight; // trigger reflow
+            document.body.style.display = '';
+
             var actualWidth = window.innerWidth;
             var scale = actualWidth / mobileWidth;
             viewportContent = "width=" + mobileWidth + 
@@ -37,37 +38,23 @@
                               ",minimum-scale=" + scale + 
                               ",maximum-scale=" + scale;
         }
-
-        // Chèn hoặc cập nhật thẻ meta viewport
-        var meta = doc.getElementById("viewport");
-        if (!meta) {
-            meta = doc.createElement("meta");
-            meta.id = "viewport";
-            meta.name = "viewport";
-            doc.head.appendChild(meta);
-        }
         meta.setAttribute("content", viewportContent);
     }
 
-    // Chạy khi load trang
-    ladi_viewport();
-    // Chạy lại khi thay đổi kích thước hoặc xoay màn hình
-    window.addEventListener('resize', ladi_viewport);
-    window.addEventListener('orientationchange', ladi_viewport);
+    // Chạy khi load
+    updateViewport();
 
-    // Giữ nguyên các hàm fbq và ttq của code gốc
-    window.ladi_fbq_data = [];
-    window.ladi_fbq = function() {
-        window.ladi_fbq_data.push(arguments);
-    };
-    window.ladi_ttq_data = [];
-    window.ladi_ttq = function() {
-        window.ladi_ttq_data.push(arguments);
-    };
+    // Lắng nghe xoay ngang/dọc & resize
+    function delayedUpdate() {
+        setTimeout(updateViewport, 250); // delay để iOS cập nhật innerWidth
+    }
+    window.addEventListener('resize', delayedUpdate);
+    window.addEventListener('orientationchange', delayedUpdate);
 })();
 </script>
 
-        <meta id="viewport" name="viewport" content="width=1200,user-scalable=no,initial-scale=1.0">
+
+
         <link rel="canonical" href="http://preview.ldpdemo.com/688e0b10804b6c0038569c0b">
         <meta property="og:url" content="http://preview.ldpdemo.com/688e0b10804b6c0038569c0b">
         <meta property="og:title" content="Trường Cao Đẳng Y Dược Và Kinh Tế Công Nghệ">
